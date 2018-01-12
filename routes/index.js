@@ -23,7 +23,7 @@ router.post('/api/analyze', function (req, res) {
             return item;
         })
         .filter(function (item) {
-            return item.length >= minSymbols && !item.match(/[\d|\W]/) && !words[item.toLowerCase()];
+            return item.length >= minSymbols && !item.match(/[\d|[^A-Za-z0-9_-]]/) && !words[item.toLowerCase()];
         })
         .filter(onlyUnique)
         .sort(function (a, b) {

@@ -42,7 +42,8 @@
                         possible.innerHTML = "";
                         msg.innerHTML = "";
                         for (var i = 0; i < data.matches.length; i++) {
-                            possible.innerHTML += "<li>" + data.matches[i] + "</li>"
+                            possible.innerHTML += "<li> <a href=\"https://www.google.com.ua/search?q="
+                                + encodeURIComponent(data.matches[i]) + "\">" + data.matches[i] + "</a></li>"
                         }
                         if( data.matches.length === 0){
                             msg.innerHTML = "No Matches! =(";
