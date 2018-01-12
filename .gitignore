@@ -1,0 +1,10 @@
+/node_modules
+.idea
+public/jquery/src/var/toString.js
+public/bootstrap/fonts/
+public/bootstrap/grunt/.jshintrc
+public/bootstrap/grunt/bs-lessdoc-parser.js
+public/bootstrap/grunt/
+public/bootstrap/js/
+public/bootstrap/less/
+public/jquery/src/

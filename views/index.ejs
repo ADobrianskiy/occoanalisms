@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Olya, you can do this!</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/bootstrap/dist/css/bootstrap.css'/>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+<h2>Olya`s analyzer</h2>
+<div class="form-group">
+    <textarea placeholder="Put article text here to analyze" id="text-data"></textarea>
+    <button class="btn btn-primary analyze-btn" onclick="analyze()">Analyze</button>
+</div>
+<div>
+    <div id="response-msg"></div>
+    <ul id="possible"></ul>
+</div>
+
+<script>
+    function analyze() {
+        var content = document.getElementById("text-data").value;
+        var form = new FormData();
+        form.append("content", content);
+
+        var myInit = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            cache: 'default',
+            body: JSON.stringify({content: content})
+        };
+
+        fetch("/api/analyze", myInit)
+            .then(function (res) {
+                    res.json().then(function (data) {
+                        var possible = document.getElementById("possible");
+                        var msg = document.getElementById("response-msg");
+                        possible.innerHTML = "";
+                        msg.innerHTML = "";
+                        for (var i = 0; i < data.matches.length; i++) {
+                            possible.innerHTML += "<li>" + data.matches[i] + "</li>"
+                        }
+                        if( data.matches.length === 0){
+                            msg.innerHTML = "No Matches! =(";
+                        }
+                    })
+                }
+            );
+    }
+</script>
+
+
+</body>
+</html>
