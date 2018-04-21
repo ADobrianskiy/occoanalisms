@@ -15,15 +15,13 @@ router.post('/api/analyze', function (req, res) {
     const matches = content
         .split(/\s/)
         .map(function (item) {
-            const specSymbols = ["'", "\"", "(", ")", "`"];
-            if (item.length >= 2 && specSymbols.indexOf(item[0]) !== -1 &&
-                specSymbols.indexOf(item[item.length - 1]) !== -1) {
-                item = item.slice(1, item.length - 1)
-            }
-            return item;
+
+            var r = /^['"()\[\]{},.’]|['"()\[\]{},.’]$/gi;
+
+            return item.replace(r, "").replace(r, "").replace(r, "").replace(/’s$/gi, "");
         })
         .filter(function (item) {
-            return item.length >= minSymbols && !item.match(/[\d|[^A-Za-z0-9_-]]/) && !words[item.toLowerCase()];
+            return !item.match(/\d/gi) && item.length >= minSymbols && !item.match(/[\d|[^A-Za-z0-9_-]]/) && !words[item.toLowerCase()];
         })
         .filter(onlyUnique)
         .sort(function (a, b) {
