@@ -16,7 +16,8 @@ router.post('/api/analyze', function (req, res) {
         .split(/\s/)
         .map(function (item) {
 
-            var r = /^[”“'"()\[\]{},.’]|['"()\[\]{},.’”“]$/gi;
+                
+            var r = /^[”“'"()\[\]{},.’?:-;*]|['"()\[\]{},.’”“?:-;*]$/gi;
 
             return item.replace(r, "").replace(r, "").replace(r, "").replace(/’s$/gi, "");
         })
